@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#4F6FF5">
+<title>MAXSEN Cloud</title>
+
+<!-- 🎨 خطوط iOS الحديثة -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/fixes.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script>
+window.onerror = function(msg, src, line, col){
+  document.documentElement.innerHTML =
+    '<div style="background:#000;color:#F0424D;padding:20px;font-family:monospace;font-size:14px;line-height:1.6;height:100vh;overflow:auto;">' +
+    '<b>❌ خطأ في التطبيق:</b><br><br>الرسالة: ' + msg + '<br>الملف: ' + src + '<br>السطر: ' + line + ':' + col + '</div>';
+};
+</script>
+</head>
+<body>
+
+<!-- ============================================================
+     SVG Icons
+     ============================================================ -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+<symbol id="i-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zM9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></symbol>
+<symbol id="i-user-add" viewBox="0 0 24 24"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></symbol>
+<symbol id="i-block" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.902 7.902 0 0 1 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.902 7.902 0 0 1 20 12c0 4.42-3.58 8-8 8z"/></symbol>
+<symbol id="i-tool" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></symbol>
+<symbol id="i-check-single" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></symbol>
+<symbol id="i-check-double" viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></symbol>
+<symbol id="i-logout" viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></symbol>
+<symbol id="i-crop" viewBox="0 0 24 24"><path d="M17 15h2V7c0-1.1-.9-2-2-2H9v2h8v8zM7 17V1H5v4H1v2h4v10c0 1.1.9 2 2 2h10v4h2v-4h4v-2H7z"/></symbol>
+<symbol id="i-undo" viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></symbol>
+<symbol id="i-text" viewBox="0 0 24 24"><path d="M5 4v3h5.5v12h3V7H19V4z"/></symbol>
+<symbol id="i-brush" viewBox="0 0 24 24"><path d="M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.16 2-2 2 .92 1.22 2.49 2 4 2 2.21 0 4-1.79 4-4 0-1.66-1.34-3-3-3zm13.71-9.37l-1.34-1.34a.996.996 0 0 0-1.41 0L9 12.25 11.75 15l8.96-8.96a.996.996 0 0 0 0-1.41z"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
+<symbol id="i-id" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9 8c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4 8H5v-1c0-1.33 2.67-2 4-2s4 .67 4 2v1zm5-1h-3v-2h3v2zm0-4h-3V9h3v2z"/></symbol>
+<symbol id="i-friends" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></symbol>
+<symbol id="i-cake" viewBox="0 0 24 24"><path d="M12 6a2 2 0 0 0 2-2c0-.38-.1-.73-.29-1.03L12 0l-1.71 2.97c-.19.3-.29.65-.29 1.03a2 2 0 0 0 2 2zm4.6 9.99l-1.07-1.07-1.08 1.07c-1.3 1.3-3.58 1.31-4.89 0l-1.07-1.07-1.09 1.07C6.75 16.64 5.88 17 4.96 17c-.73 0-1.4-.23-1.96-.61V21c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-4.61c-.56.38-1.23.61-1.96.61-.92 0-1.79-.36-2.44-1.01zM18 9h-5V7h-2v2H6c-1.66 0-3 1.34-3 3v1.54c0 1.08.88 1.96 1.96 1.96.52 0 1.02-.2 1.38-.57l2.14-2.13 2.13 2.13c.74.74 2.03.74 2.77 0l2.14-2.13 2.13 2.13c.37.37.86.57 1.38.57 1.08 0 1.96-.88 1.96-1.96V12c.01-1.66-1.33-3-2.99-3z"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></symbol>
+<symbol id="i-more" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24"><path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></symbol>
+<symbol id="i-mute" viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0 0 14 7.97v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></symbol>
+<symbol id="i-archive" viewBox="0 0 24 24"><path d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM12 17.5L6.5 12H10v-2h4v2h3.5L12 17.5zM5.12 5l.81-1h12l.94 1H5.12z"/></symbol>
+<symbol id="i-unarchive" viewBox="0 0 24 24"><path d="M20.55 5.22l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.15.55L3.46 5.22C3.17 5.57 3 6.01 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.49-.17-.93-.45-1.28zM12 9.5l5.5 5.5H14v2h-4v-2H6.5L12 9.5zM5.12 5l.82-1h12l.93 1H5.12z"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.484.484 0 0 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
+<symbol id="i-heart-outline" viewBox="0 0 24 24"><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></symbol>
+<symbol id="i-comment" viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></symbol>
+<symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></symbol>
+<symbol id="i-bookmark-outline" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16a5 5 0 0 0 5-5c0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></symbol>
+<symbol id="i-erase" viewBox="0 0 24 24"><path d="M15.14 3c-.51 0-1.02.2-1.41.59L2.59 14.72a2 2 0 0 0 0 2.83L6 21h7.27l6.29-6.29a2 2 0 0 0 0-2.83L16.56 3.6A1.99 1.99 0 0 0 15.14 3zM9.53 19H6.83l-3.41-3.41L10 9.02l4.98 4.98L9.53 19z"/></symbol>
+<symbol id="i-reply" viewBox="0 0 24 24"><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></symbol>
+<symbol id="i-forward" viewBox="0 0 24 24"><path d="M14 9V5l7 7-7 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z"/></symbol>
+<symbol id="i-post" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M9.37 5.51A7.35 7.35 0 0 0 9.1 7.5c0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27A7.014 7.014 0 0 1 12 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49zM12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></symbol>
+<symbol id="i-bookmark-saved" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></symbol>
+<symbol id="i-person" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></symbol>
+</svg>
+
+<!-- ============================================================
+     Splash
+     ============================================================ -->
+<div class="splash" id="splash">
+  <div class="logo">M</div>
+  <h1>MAXSEN Cloud</h1>
+  <div class="tagline">تواصل • شارك • اكتشف</div>
+  <div class="spin"></div>
+</div>
+
+<!-- ============================================================
+     App
+     ============================================================ -->
+<div class="app" id="app">
+<div class="toast" id="toast"><span id="toast-text"></span></div>
+
+<!-- ============ Login ============ -->
+<div class="screen active" id="s-login">
+<div class="nav"><div class="nav-title">تسجيل الدخول</div></div>
+<div class="content">
+
+<div class="login-header">
+  <div class="login-logo">M</div>
+  <div class="login-title">MAXSEN Cloud</div>
+  <div class="login-tagline">تواصل • شارك • اكتشف</div>
+  <div class="login-status" id="conn-status">جاري الاتصال...</div>
+</div>
+
+<div class="field-card">
+  <div class="fc-icon"><svg><use href="#i-person"/></svg></div>
+  <div class="fc-body">
+    <div class="fc-label">اسم المستخدم أو ID</div>
+    <input type="text" id="lg-user" placeholder="username أو M123...">
+  </div>
+</div>
+
+<div class="field-card">
+  <div class="fc-icon"><svg><use href="#i-key"/></svg></div>
+  <div class="fc-body">
+    <div class="fc-label">كلمة السر</div>
+    <input type="password" id="lg-pass" placeholder="••••••••">
+  </div>
+</div>
+
+<div class="field-card">
+  <div class="fc-icon"><svg><use href="#i-shield"/></svg></div>
+  <div class="fc-body">
+    <div class="fc-label">الرمز السري</div>
+    <input type="tel" id="lg-pin" placeholder="8 أرقام" inputmode="numeric" maxlength="8">
+  </div>
+</div>
+
+<button class="btn" id="btn-login" onclick="doLogin()" style="margin-top:8px">
+<svg class="svg-ic"><use href="#i-check"/></svg> تسجيل الدخول
+</button>
+<button class="btn-2" onclick="nav('s-signup')">إنشاء حساب جديد</button>
+</div>
+</div>
+
+<!-- ============ Signup ============ -->
+<div class="screen" id="s-signup">
+<div class="nav">
+<button class="nav-btn" onclick="nav('s-login')"><svg class="svg-ic"><use href="#i-back"/></svg></button>
+<div class="nav-title">حساب جديد</div>
+<div style="width:44px"></div>
+</div>
+<div class="content">
+
+<div style="text-align:center;margin:8px 0 20px">
+<div style="width:68px;height:68px;background:linear-gradient(135deg,rgba(143,169,255,.95),rgba(79,111,245,.98));border-radius:22px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px;font-weight:800;border:1.5px solid rgba(255,255,255,.45);box-shadow:0 12px 28px rgba(79,111,245,.4),0 1px 0 rgba(255,255,255,.5) inset">M</div>
+<div style="font-size:20px;font-weight:800;letter-spacing:-.4px">إنشاء حساب</div>
+<div style="font-size:12.5px;color:var(--text2);margin-top:4px;font-weight:500">انضم إلى MAXSEN Cloud</div>
+</div>
+
+<div class="settings-title" style="padding-right:4px">معلوماتك</div>
+<div class="group">
+<div class="input-row"><span class="label">الاسم الأول</span><input type="text" id="su-fn" class="input" placeholder="الاسم الأول"></div>
+<div class="input-row"><span class="label">اسم العائلة</span><input type="text" id="su-ln" class="input" placeholder="اسم العائلة"></div>
+<div class="input-row"><span class="label">العمر</span><input type="tel" id="su-age" class="input" placeholder="20" inputmode="numeric" maxlength="3"></div>
+</div>
+
+<div class="settings-title" style="padding-right:4px;margin-top:20px">بيانات الحساب</div>
+<div class="group">
+<div class="input-row"><span class="label">المستخدم</span><input type="text" id="su-un" class="input" placeholder="username" oninput="checkUsername(this.value)" autocapitalize="off"><span id="un-badge" style="font-size:12px;margin-right:4px"></span></div>
+<div class="input-row"><span class="label">كلمة السر</span><input type="password" id="su-pass" class="input" placeholder="8 خانات+"></div>
+<div class="input-row"><span class="label">الرمز السري</span><input type="tel" id="su-pin" class="input" placeholder="8 أرقام" inputmode="numeric" maxlength="8"></div>
+</div>
+
+<button class="btn" id="btn-signup" onclick="doSignup()" style="margin-top:8px">
+<svg class="svg-ic"><use href="#i-user-add"/></svg> إنشاء الحساب
+</button>
+</div>
+</div>
+
+<!-- ============ Main ============ -->
+<div class="screen" id="s-main">
+
+<!-- Tab: Chats -->
+<div id="tab-chats" class="tabc">
+<div class="nav">
+<div class="nav-title">المحادثات</div>
+<button class="nav-btn icon-only" onclick="openSavedMessages()" title="المفضلة" style="margin-left:8px">
+<svg><use href="#i-bookmark-saved"/></svg>
+</button>
+</div>
+<div class="content"><div id="chat-list"></div></div>
+</div>
+
+<!-- Tab: Friends -->
+<div id="tab-friends" class="tabc sheet-tab">
+<div class="sheet-grip"></div>
+<div class="nav"><div class="nav-title">البحث والأصدقاء</div></div>
+<div class="content">
+<div class="search-bar">
+<div class="si"><svg><use href="#i-search"/></svg></div>
+<input type="text" id="search-q" placeholder="اسم مستخدم أو MAXSEN ID..." autocapitalize="off" onkeydown="if(event.key==='Enter'){event.preventDefault();doSearchNow();}">
+<button class="search-btn" onclick="doSearchNow()"><svg><use href="#i-search"/></svg><span>بحث</span></button>
+</div>
+
+<div class="search-bar" style="margin-top:-8px">
+<div class="si" style="color:#7C5CFC"><svg><use href="#i-chat"/></svg></div>
+<input type="text" id="global-search-q" placeholder="ابحث في كل الرسائل..." onkeydown="if(event.key==='Enter'){event.preventDefault();globalSearch(this.value);}">
+<button class="search-btn" onclick="globalSearch(document.getElementById('global-search-q').value)" style="background:linear-gradient(135deg,rgba(124,92,252,.95),rgba(99,68,224,.95))"><svg><use href="#i-search"/></svg><span>بحث</span></button>
+</div>
+
+<div id="search-area"><div class="empty-state">اكتب اسم مستخدم أو ID ثم اضغط بحث</div></div>
+<h4 style="font-size:13px;color:var(--text2);margin:20px 0 10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:0 4px">طلبات الصداقة <span id="req-count"></span></h4>
+<div id="req-list"></div>
+<h4 style="font-size:13px;color:var(--text2);margin:20px 0 10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:0 4px">الأصدقاء <span id="fr-count"></span></h4>
+<div id="friends-list"></div>
+</div>
+</div>
+
+<!-- Tab: Profile -->
+<div id="tab-profile" class="tabc sheet-tab">
+<div class="sheet-grip"></div>
+<div class="nav">
+<button class="nav-btn icon-only" onclick="nav('s-settings')" title="الإعدادات"><svg><use href="#i-settings"/></svg></button>
+<div class="nav-title">حسابي</div>
+<button class="nav-btn" id="save-btn" onclick="saveProfile()" disabled><svg class="svg-ic"><use href="#i-check"/></svg> حفظ</button>
+</div>
+<div class="content">
+<div class="user-hero" id="my-hero">
+<label for="ava-file" class="hero-edit" title="تغيير الصورة"><svg><use href="#i-camera"/></svg></label>
+<input type="file" id="ava-file" accept="image/*" style="display:none" onchange="pickAvatar(event)">
+<div class="hero-content">
+<div class="avatar-xl"><img id="my-ava" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23ddd' width='100' height='100'/%3E%3Ccircle cx='50' cy='40' r='20' fill='%23999'/%3E%3Cpath d='M20 90 Q50 60 80 90' fill='%23999'/%3E%3C/svg%3E"></div>
+<div class="hero-text">
+<div class="hero-name" id="my-name">—</div>
+<div class="hero-username" id="my-un">@—</div>
+<div class="hero-presence online">متصل الآن</div>
+<div class="hero-id" onclick="copyId()"><svg><use href="#i-id"/></svg><span id="my-id">—</span></div>
+</div>
+</div>
+<div class="hero-themes" id="my-hero-themes"></div>
+</div>
+
+<div class="profile-stats">
+<div class="pstat"><div class="pstat-val" id="stat-posts">0</div><div class="pstat-lbl">منشورات</div></div>
+<div class="pstat"><div class="pstat-val" id="stat-friends">0</div><div class="pstat-lbl">أصدقاء</div></div>
+<div class="pstat"><div class="pstat-val" id="stat-age">—</div><div class="pstat-lbl">سنة</div></div>
+</div>
+
+<div class="stats-card">
+<div class="stat-item">
+<div class="stat-value" id="stat-msgs">0</div>
+<div class="stat-label">رسائل مُرسلة</div>
+</div>
+<div class="stat-item">
+<div class="stat-value" id="stat-days">0</div>
+<div class="stat-label">يوم نشط</div>
+</div>
+</div>
+
+<div class="group">
+<div class="input-row"><span class="label">الاسم الأول</span><input type="text" id="ed-fn" class="input" oninput="dirty()"></div>
+<div class="input-row"><span class="label">اسم العائلة</span><input type="text" id="ed-ln" class="input" oninput="dirty()"></div>
+<div class="input-row"><span class="label">العمر</span><input type="tel" id="ed-age" class="input" inputmode="numeric" oninput="dirty()"></div>
+</div>
+<div class="group" style="padding:16px">
+<div style="display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--text2);margin-bottom:10px"><svg style="width:15px;height:15px;fill:var(--text2)"><use href="#i-note"/></svg> السيرة الذاتية</div>
+<textarea id="ed-bio" class="input" style="width:100%;height:82px;padding:12px 14px;font-size:15.5px;border:1px solid var(--glass-border-light);border-radius:14px;background:var(--glass-3);backdrop-filter:blur(10px);direction:rtl;outline:none;resize:none;font-family:inherit;line-height:1.5" maxlength="200" oninput="dirty();document.getElementById('bio-c').textContent=this.value.length+' / 200'" placeholder="اكتب نبذة عنك..."></textarea>
+<div style="font-size:12px;color:var(--text2);text-align:left;padding:8px 4px 0;font-weight:600" id="bio-c">0 / 200</div>
+</div>
+<div class="post-box" onclick="openCreatePost()"><div class="post-box-inner"><div class="post-box-avatar"><img id="post-box-ava" src=""></div><div class="post-box-hint">بمَ تفكر؟</div></div></div>
+<div id="my-posts-feed"></div>
+</div>
+</div>
+
+<!-- Floating Glass Tab Bar -->
+<div class="tab-bar" id="tab-bar">
+<div class="tab active" data-tab="chats" onclick="tab('chats')"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg><span>المحادثات</span><span class="badge" id="tab-chats-badge" style="display:none"></span></div>
+<div class="tab" data-tab="friends" onclick="tab('friends')"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg><span>الأصدقاء</span><span class="badge" id="tab-badge" style="display:none"></span></div>
+<div class="tab" data-tab="profile" onclick="tab('profile')"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span>حسابي</span></div>
+</div>
+</div>
+
+<!-- ============ User Profile ============ -->
+<div class="screen" id="s-user">
+<div class="nav">
+<button class="nav-btn" onclick="nav('s-main')"><svg class="svg-ic"><use href="#i-back"/></svg></button>
+<div class="nav-title" id="user-nav-title"></div>
+<button class="nav-btn" onclick="openUserMenu()"><svg class="svg-ic"><use href="#i-more"/></svg></button>
+</div>
+<div class="content" id="user-profile-content"></div>
+</div>
+
+<!-- ============ Settings ============ -->
+<div class="screen" id="s-settings">
+<div class="nav">
+<button class="nav-btn" onclick="nav('s-main');tab('profile')"><svg class="svg-ic"><use href="#i-back"/></svg></button>
+<div class="nav-title">الإعدادات</div>
+<div style="width:44px"></div>
+</div>
+<div class="content">
+
+<div class="settings-section">
+<div class="settings-title">المظهر</div>
+<div class="settings-group">
+<div class="settings-item" onclick="toggleDark()"><div class="ic" style="background:linear-gradient(135deg,#8FA9FF,#4F6FF5)"><svg><use href="#i-moon"/></svg></div><div class="label-s">الوضع الداكن</div><div class="switch" id="dark-switch"></div></div>
+<div class="settings-item" onclick="toggleAutoDark()"><div class="ic" style="background:linear-gradient(135deg,#F59E0B,#F97316)"><svg><use href="#i-sun"/></svg></div><div class="label-s">داكن تلقائي (19:00 - 06:00)</div><div class="switch" id="auto-dark-switch"></div></div>
+</div>
+</div>
+
+<div class="settings-section">
+<div class="settings-title">الرسائل</div>
+<div class="settings-group">
+<div class="settings-item" onclick="openSavedMessages()">
+<div class="ic" style="background:linear-gradient(135deg,#7C5CFC,#EC4899)"><svg><use href="#i-bookmark-saved"/></svg></div>
+<div class="label-s">الرسائل المحفوظة</div>
+<div class="arrow">‹</div>
+</div>
+</div>
+</div>
+
+<div class="settings-section">
+<div class="settings-title">الحساب</div>
+<div class="settings-group">
+<div class="settings-item" onclick="nav('s-support')"><div class="ic" style="background:linear-gradient(135deg,#8FA9FF,#4F6FF5)"><svg><use href="#i-tool"/></svg></div><div class="label-s">الدعم الفني</div><div class="arrow">‹</div></div>
+</div>
+</div>
+
+<div class="settings-section">
+<div class="settings-title">الخروج</div>
+<div class="settings-group">
+<div class="settings-item danger" onclick="doLogout()"><div class="ic" style="background:linear-gradient(135deg,#FB6B75,#DC2626)"><svg><use href="#i-logout"/></svg></div><div class="label-s">تسجيل الخروج</div><div class="arrow">‹</div></div>
+</div>
+</div>
+
+<div class="settings-about">
+<div class="logo-s">M</div>
+<b>MAXSEN Cloud</b>
+الإصدار 11.1 — iOS Glass Edition
+</div>
+</div>
+</div>
+
+<!-- ============ Report Tech ============ -->
+<div class="screen" id="s-report-tech">
+<div class="nav"><button class="nav-btn" onclick="nav('s-user')"><svg class="svg-ic"><use href="#i-back"/></svg></button><div class="nav-title">بلاغ فني</div><div style="width:44px"></div></div>
+<div class="content">
+<div class="report-hint"><svg><use href="#i-info"/></svg><span>اشرح المشكلة الفنية بالتفصيل.</span></div>
+<div id="report-tech-user" style="margin-bottom:16px"></div>
+<textarea id="report-tech-text" class="report-textarea" placeholder="اكتب الوصف (10 أحرف+)" oninput="document.getElementById('report-tech-submit').disabled = this.value.trim().length < 10"></textarea>
+<button class="btn" id="report-tech-submit" disabled onclick="submitReportTech()"><svg class="svg-ic"><use href="#i-send"/></svg> إرسال البلاغ</button>
+</div>
+</div>
+
+<!-- ============ Report User ============ -->
+<div class="screen" id="s-report-user">
+<div class="nav"><button class="nav-btn" onclick="nav('s-user')"><svg class="svg-ic"><use href="#i-back"/></svg></button><div class="nav-title">بلاغ عن مستخدم</div><div style="width:44px"></div></div>
+<div class="content">
+<div class="report-hint" style="background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(239,68,68,.08));color:#EF4444;border-color:rgba(239,68,68,.2)"><svg style="fill:#EF4444"><use href="#i-info"/></svg><span>قدّم بلاغك بسبب واضح.</span></div>
+<div id="report-user-user" style="margin-bottom:16px"></div>
+<textarea id="report-user-text" class="report-textarea" placeholder="اكتب السبب (10 أحرف+)" oninput="document.getElementById('report-user-submit').disabled = this.value.trim().length < 10"></textarea>
+<button class="btn" id="report-user-submit" style="background:linear-gradient(135deg,rgba(251,107,117,.95),rgba(220,38,38,.95));box-shadow:0 8px 24px rgba(239,68,68,.35)" disabled onclick="submitReportUser()"><svg class="svg-ic"><use href="#i-flag"/></svg> إرسال البلاغ</button>
+</div>
+</div>
+
+<!-- ============ Chat ============ -->
+<div class="screen" id="s-chat">
+<div class="nav">
+<button class="nav-btn back-btn" onclick="nav('s-main')"><svg><use href="#i-back"/></svg></button>
+<div class="chat-nav-info" onclick="openChatProfile()"><img id="ch-ava" src=""><div class="cn-info"><div class="cn-name" id="ch-name"></div><div class="cn-status" id="ch-status">متصل</div></div></div>
+<button class="nav-btn menu-btn" onclick="openChatMenu()"><svg><use href="#i-more"/></svg></button>
+</div>
+
+<div class="chat-search-bar" id="chat-search-bar">
+<input type="text" id="chat-search-input" placeholder="ابحث في المحادثة..." oninput="filterChatMessages(this.value)">
+<span class="chat-search-count" id="chat-search-count"></span>
+<button class="chat-search-nav" onclick="searchNavigate(-1)" title="السابق"><svg><use href="#i-up"/></svg></button>
+<button class="chat-search-nav" onclick="searchNavigate(1)" title="التالي"><svg><use href="#i-down"/></svg></button>
+<button class="chat-search-close" onclick="closeChatSearch()">إغلاق</button>
+</div>
+
+<div class="content" id="chat-content">
+<div class="pinned-banner" id="pinned-banner" style="display:none" onclick="scrollToPinned()"><svg><use href="#i-pin"/></svg><span class="pin-text" id="pinned-text"></span><button class="pin-close" onclick="event.stopPropagation();unpinCurrent()"><svg><use href="#i-close"/></svg></button></div>
+<div id="msgs" class="chat-box"></div>
+
+<button class="scroll-bottom-btn" id="scroll-bottom-btn" onclick="scrollToBottom()">
+<svg><use href="#i-chevron-down"/></svg>
+<span class="sb-badge" id="scroll-bottom-badge" style="display:none">0</span>
+</button>
+</div>
+
+<div class="chat-input" id="chat-input-bar">
+<div class="recording-indicator" id="recording-indicator">
+<div class="recording-dot"></div>
+<div class="recording-timer" id="recording-timer">0:00</div>
+<div class="recording-hint">أفلت للإرسال • اسحب للخارج للإلغاء</div>
+</div>
+<div class="emoji-panel" id="emoji-panel"></div>
+<div class="reply-bar" id="reply-bar"><div class="reply-content"><div class="reply-name" id="reply-name"></div><div class="reply-txt" id="reply-txt"></div></div><button class="reply-x" onclick="cancelReply()"><svg><use href="#i-close"/></svg></button></div>
+<div class="chat-input-row">
+<button class="icon-btn" onclick="openGalleryDirect()" title="صورة"><svg><use href="#i-camera"/></svg></button>
+<button class="emoji-btn" onclick="toggleEmojiPanel()" title="إيموجي">😀</button>
+<button class="icon-btn mic-btn" id="mic-btn" title="اضغط مطولاً للتسجيل"><svg><use href="#i-mic"/></svg></button>
+<input type="file" id="chat-photo-input" accept="image/*" style="display:none" onchange="pickChatPhoto(event)">
+<div class="msg-wrap"><textarea id="msg-in" placeholder="رسالة..." rows="1"></textarea></div>
+<button class="send-btn" id="send-btn" disabled onclick="sendMsg()"><svg><use href="#i-send"/></svg></button>
+</div>
+</div>
+
+<div class="blocked-banner" id="blocked-banner" style="display:none"><svg><use href="#i-lock"/></svg><div>تم حظرك من قبل هذا المستخدم</div><div class="sub" style="font-size:13px;font-weight:600;opacity:.7;color:var(--text-secondary)"></div></div>
+</div>
+
+<!-- ============ Support ============ -->
+<div class="screen" id="s-support">
+<div class="nav"><button class="nav-btn" onclick="nav('s-main');tab('profile')"><svg class="svg-ic"><use href="#i-back"/></svg></button><div class="nav-title">الدعم</div><div style="width:44px"></div></div>
+<div class="content">
+<div class="report-hint"><svg><use href="#i-info"/></svg><span>أرسل استفسارك وسيتم الرد قريباً.</span></div>
+<textarea id="sup-txt" class="report-textarea" placeholder="اشرح المشكلة (10 أحرف+)" oninput="document.getElementById('sup-btn').disabled=this.value.trim().length<10"></textarea>
+<button class="btn" id="sup-btn" disabled onclick="sendSupport()"><svg class="svg-ic"><use href="#i-send"/></svg> إرسال</button>
+</div>
+</div>
+
+</div>
+
+<!-- ============================================================
+     Modals
+     ============================================================ -->
+<div class="modal" id="msg-action-modal" onclick="closeMsgAction()"><div class="sheet" onclick="event.stopPropagation()"><div class="reactions-picker" id="reactions-picker"></div><div class="act-group" id="msg-action-list"></div><div class="act-group"><div class="act" style="font-weight:600" onclick="closeMsgAction()">إلغاء</div></div></div></div>
+<div class="modal" id="forward-modal" onclick="closeForward()"><div class="sheet" onclick="event.stopPropagation()"><div style="text-align:center;font-size:16.5px;font-weight:800;margin-bottom:14px">تحويل الرسالة إلى...</div><div id="forward-list" style="max-height:50vh;overflow-y:auto"></div><div class="act-group"><div class="act" style="font-weight:600" onclick="closeForward()">إلغاء</div></div></div></div>
+<div class="modal center" id="edit-msg-modal"><div class="dialog"><div class="dialog-head"><div class="dialog-title"><svg style="fill:var(--primary)"><use href="#i-edit"/></svg> تعديل الرسالة</div></div><textarea id="edit-msg-input" class="edit-textarea" maxlength="2000"></textarea><div class="dialog-actions"><button class="dialog-btn cancel" onclick="closeEditMsg()">إلغاء</button><button class="dialog-btn" style="color:var(--primary);font-weight:700;border-left:1px solid var(--glass-border-light)" onclick="saveMsgEdit()">حفظ</button></div></div></div>
+<div class="modal center" id="delete-modal"><div class="dialog"><div class="dialog-head"><div class="dialog-title"><svg style="fill:var(--delete)"><use href="#i-trash"/></svg> حذف الرسالة</div></div><div class="dialog-body">هل تريد حذف هذه الرسالة لديك فقط؟</div><label class="dialog-check" id="delete-everyone-row"><input type="checkbox" id="delete-for-everyone"><span>حذف للجميع</span></label><div class="dialog-actions"><button class="dialog-btn cancel" onclick="cancelDelete()">إلغاء</button><button class="dialog-btn confirm" onclick="confirmDelete()">حذف</button></div></div></div>
+<div class="modal center" id="clear-chat-modal"><div class="dialog"><div class="dialog-head"><div class="dialog-title"><svg style="fill:var(--delete)"><use href="#i-erase"/></svg> مسح السجل</div></div><div class="dialog-body">هل تريد مسح جميع الرسائل؟<br>لن تُحذف المحادثة نفسها.</div><div class="dialog-actions"><button class="dialog-btn cancel" onclick="document.getElementById('clear-chat-modal').classList.remove('active')">إلغاء</button><button class="dialog-btn confirm" onclick="confirmClearChat()">مسح</button></div></div></div>
+<div class="modal" id="action-modal" onclick="closeActionModal()"><div class="sheet" onclick="event.stopPropagation()"><div class="act-group" id="action-list"></div><div class="act-group"><div class="act" style="font-weight:600" onclick="closeActionModal()">إلغاء</div></div></div></div>
+<div class="modal" id="chat-menu-modal" onclick="closeChatMenu()"><div class="sheet" onclick="event.stopPropagation()"><div class="act-group" id="chat-menu-list"></div><div class="act-group"><div class="act" style="font-weight:600" onclick="closeChatMenu()">إلغاء</div></div></div></div>
+<div class="modal" id="chat-bg-modal" onclick="closeChatBg()"><div class="sheet" onclick="event.stopPropagation()"><div style="text-align:center;font-size:16.5px;font-weight:800;margin-bottom:14px">خلفية المحادثة</div><div class="bg-grid" id="chat-bg-grid"></div><div class="act-group"><div class="act" style="font-weight:600" onclick="closeChatBg()">إغلاق</div></div></div></div>
+<div class="modal" id="friend-menu-modal" onclick="closeFriendMenu()"><div class="sheet" onclick="event.stopPropagation()"><div style="padding:6px 10px 10px;text-align:center;font-size:13.5px;color:var(--text2);font-weight:600" id="friend-menu-name"></div><div class="act-group" id="friend-menu-list"></div><div class="act-group"><div class="act" style="font-weight:600" onclick="closeFriendMenu()">إلغاء</div></div></div></div>
+<div class="modal" id="post-modal" onclick="closeCreatePost()"><div class="sheet" onclick="event.stopPropagation()" style="max-height:92vh">
+<div style="text-align:center;font-size:17px;font-weight:800;margin-bottom:14px">منشور جديد</div>
+<div class="post-image-preview" id="post-image-preview" style="display:none">
+<img id="post-image-img" src="">
+<button class="remove-x" onclick="removePostImage()"><svg><use href="#i-close"/></svg></button>
+</div>
+<div class="post-create-preview" id="post-preview" contenteditable="true" data-placeholder="اكتب شيئاً..." style="background:linear-gradient(135deg, #667EEA 0%, #764BA2 100%)" oninput="updatePostPreviewLen()"></div>
+<div style="text-align:left;font-size:12.5px;color:var(--text2);font-weight:700;margin-bottom:10px;padding:0 4px" id="post-len">0 / 100</div>
+<div class="post-create-tools">
+<button class="post-tool-btn" onclick="pickPostImage()"><svg><use href="#i-image"/></svg> صورة</button>
+<button class="post-tool-btn" onclick="clearPostAll()">تفريغ</button>
+</div>
+<div class="post-create-bg-row" id="post-bg-row"></div>
+<button class="btn" id="post-publish-btn" onclick="publishPost()"><svg class="svg-ic"><use href="#i-send"/></svg> نشر</button>
+<input type="file" id="post-image-input" accept="image/*" style="display:none" onchange="onPostImagePick(event)">
+</div></div>
+<div class="modal" id="comments-modal" onclick="closeComments()"><div class="sheet comments-sheet" onclick="event.stopPropagation()"><div class="comments-header"><div>التعليقات</div><button class="close-x" onclick="closeComments()"><svg><use href="#i-close"/></svg></button></div><div class="comments-post-preview" id="comments-post-preview"></div><div class="comments-list" id="comments-list"></div><div class="comment-input-bar"><input type="text" id="comment-input" placeholder="اكتب تعليقاً..." maxlength="500" oninput="document.getElementById('comment-send').disabled=!this.value.trim()"><button class="send" id="comment-send" disabled onclick="postComment()"><svg><use href="#i-send"/></svg></button></div></div></div>
+<div class="modal" id="comment-menu-modal" onclick="closeCommentMenu()"><div class="sheet" onclick="event.stopPropagation()"><div class="act-group" id="comment-menu-list"></div><div class="act-group"><div class="act" style="font-weight:600" onclick="closeCommentMenu()">إلغاء</div></div></div></div>
+<div class="photo-picker" id="photo-picker" onclick="closePhotoPicker()"><div class="sheet" onclick="event.stopPropagation()"><div class="act-group"><div class="act" onclick="pickPhotoFromCamera()"><svg><use href="#i-camera"/></svg> التقاط صورة</div><div class="act" onclick="pickPhotoFromGallery()"><svg><use href="#i-image"/></svg> اختيار من المعرض</div></div><div class="act-group"><div class="act" style="font-weight:600" onclick="closePhotoPicker()">إلغاء</div></div></div></div>
+<div class="img-viewer" id="img-viewer" onclick="closeImgViewer()"><button class="close-btn" onclick="closeImgViewer()"><svg><use href="#i-close"/></svg></button><img id="img-viewer-src" src=""></div>
+<div class="pe" id="photo-editor">
+<div class="pe-top"><button onclick="closePhotoEditor()"><svg><use href="#i-close"/></svg> إلغاء</button><div style="font-size:15px;font-weight:800">تعديل</div><button class="primary" onclick="sendEditedPhoto()"><svg><use href="#i-send"/></svg> إرسال</button></div>
+<div class="pe-canvas-wrap"><canvas id="pe-canvas"></canvas></div>
+<div class="pe-tools">
+<div class="pe-tools-row">
+<button class="pe-tool active" data-mode="draw" onclick="setPeMode('draw',this)"><svg><use href="#i-brush"/></svg> رسم</button>
+<button class="pe-tool" data-mode="text" onclick="setPeMode('text',this)"><svg><use href="#i-text"/></svg> نص</button>
+<button class="pe-tool" data-mode="crop" onclick="setPeMode('crop',this)"><svg><use href="#i-crop"/></svg> قص</button>
+<button class="pe-tool" onclick="peUndo()"><svg><use href="#i-undo"/></svg> تراجع</button>
+<button class="pe-tool" onclick="peReset()"><svg><use href="#i-refresh"/></svg> إعادة</button>
+</div>
+<div class="pe-tools-row" id="pe-color-row"><div class="pe-colors">
+<div class="pe-color active" style="background:#EF4444" onclick="setPeColor('#EF4444',this)"></div>
+<div class="pe-color" style="background:#F59E0B" onclick="setPeColor('#F59E0B',this)"></div>
+<div class="pe-color" style="background:#22C55E" onclick="setPeColor('#22C55E',this)"></div>
+<div class="pe-color" style="background:#4F6FF5" onclick="setPeColor('#4F6FF5',this)"></div>
+<div class="pe-color" style="background:#7C5CFC" onclick="setPeColor('#7C5CFC',this)"></div>
+<div class="pe-color" style="background:#FFFFFF" onclick="setPeColor('#FFFFFF',this)"></div>
+<div class="pe-color" style="background:#000000" onclick="setPeColor('#000000',this)"></div>
+</div></div>
+<div class="pe-slider"><svg style="width:16px;height:16px;fill:#fff"><use href="#i-brush"/></svg><input type="range" id="pe-size" min="2" max="30" value="6"><span id="pe-size-val" style="min-width:26px;text-align:center;font-weight:800">6</span></div>
+</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/user.js"></script>
+<script src="js/messaging.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

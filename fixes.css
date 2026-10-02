@@ -1,0 +1,167 @@
+/* ============================================================
+   fixes.css — MAXSEN Cloud 11.1
+   إصلاح الشاشات + الفقاعات + الأداء
+   ============================================================ */
+
+/* ============================================================
+   🖥️ إصلاح 1: الشاشات لا تتراكب
+   ============================================================ */
+.screen:not(.active){
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+.screen.active{
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* إخفاء tab-bar في الشاشات غير النشطة */
+.screen:not(.active) .tab-bar{
+  visibility: hidden !important;
+  display: none !important;
+}
+
+/* ضمان أن شاشة المحادثة فوق الكل */
+#s-chat.active{
+  z-index: 30 !important;
+}
+#s-user.active{
+  z-index: 25 !important;
+}
+#s-settings.active,
+#s-report-user.active,
+#s-report-tech.active,
+#s-support.active{
+  z-index: 20 !important;
+}
+
+/* ============================================================
+   💬 إصلاح 2: نص الفقاعة لا يخرج
+   ============================================================ */
+.bubble-wrap{
+  max-width: min(82%, 400px);
+  min-width: 0;
+}
+.bubble{
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.bubble .bubble-text{
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.bubble .bubble-text *{
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* إصلاح الروابط الطويلة */
+.bubble a{
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+
+/* ============================================================
+   ⚡ إصلاح 3: أداء أسرع
+   ============================================================ */
+/* إلغاء الـ backdrop-filter في القوائم الكبيرة */
+.app.dark .tabc.sheet-tab{
+  background: var(--bg-base) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* تسريع الفقاعات */
+.bubble{
+  will-change: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* إلغاء تحريك الـ Mesh عند الأداء المنخفض */
+@media (prefers-reduced-motion: reduce){
+  .app{
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   😀 إصلاح 4: زر الإيموجي في المحادثة
+   ============================================================ */
+.emoji-btn{
+  background: var(--glass-2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border-light);
+  color: var(--primary);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  padding: 0;
+  flex-shrink: 0;
+  transition: transform .12s var(--spring), background .15s;
+  line-height: 1;
+}
+.emoji-btn:active{
+  transform: scale(.88);
+  background: var(--glass-3);
+}
+
+/* لوحة الإيموجي */
+.emoji-panel{
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background: var(--glass-1);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border-top: 1px solid var(--glass-border);
+  max-height: 240px;
+  overflow-y: auto;
+  display: none;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 1px;
+  padding: 10px;
+  box-shadow: 0 -10px 30px rgba(31,38,135,.15);
+  z-index: 5;
+}
+.emoji-panel.show{
+  display: grid;
+}
+.emoji-panel::-webkit-scrollbar{ width: 0; }
+.emoji-panel .em{
+  font-size: 26px;
+  text-align: center;
+  padding: 6px 0;
+  cursor: pointer;
+  border-radius: 9px;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  transition: transform .15s, background .15s;
+}
+.emoji-panel .em:active{
+  background: var(--glass-3);
+  transform: scale(1.2);
+}
+
+/* ============================================================
+   🎨 إصلاح 5: خلفيات المحادثة — iPhone Style (في CSS)
+   ============================================================ */
+/* لا حاجة لتعديل CSS — يتم في JS */

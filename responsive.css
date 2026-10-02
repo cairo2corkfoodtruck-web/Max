@@ -1,0 +1,87 @@
+/* ============================================================
+   responsive.css — MAXSEN Cloud 10.0
+   ============================================================ */
+
+/* Small phones */
+@media (max-width: 360px){
+  .content{ padding: 14px 10px 110px; }
+  .label{ width: 88px; font-size: 13.5px; }
+  .input{ font-size: 16px; }
+  .login-title{ font-size: 22px; }
+  .login-logo{ width: 74px; height: 74px; font-size: 32px; }
+  .field-card{ padding: 12px 14px; }
+  .field-card input{ font-size: 15.5px; }
+  .tab-bar{ left: 10px; right: 10px; height: 62px; }
+  .tab{ font-size: 10px; }
+  .tab svg{ width: 21px; height: 21px; }
+  .btn{ padding: 15px 20px; font-size: 16px; }
+}
+
+/* Tablets and larger phones */
+@media (min-width: 500px){
+  .app{
+    border-radius: 52px;
+    box-shadow:
+      0 0 0 11px #0a0a0e,
+      0 0 0 13px #1a1a20,
+      0 0 0 14px rgba(255,255,255,.05),
+      0 60px 130px rgba(0,0,0,.75),
+      0 0 200px rgba(79,111,245,.35);
+    height: 94vh;
+  }
+}
+
+/* Very large screens — standalone */
+@media (display-mode: standalone){
+  .app{
+    max-height: none;
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .splash .logo{ animation: none; }
+  .skeleton{ animation: none; }
+}
+
+/* Landscape */
+@media (orientation: landscape) and (max-height: 500px){
+  .app{
+    max-height: 100vh;
+    height: 100vh;
+  }
+  .nav{ height: 50px; }
+  .content{ padding: 14px 14px 100px; }
+}
+
+/* High contrast */
+@media (prefers-contrast: more){
+  :root{
+    --border: rgba(23,26,36,.18);
+    --border-strong: rgba(23,26,36,.28);
+  }
+  .app.dark{
+    --border: rgba(255,255,255,.16);
+    --border-strong: rgba(255,255,255,.24);
+  }
+}
+
+/* Dark mode color-scheme hint */
+@media (prefers-color-scheme: dark){
+  .app:not(.force-light){ color-scheme: dark; }
+}
+
+/* Long press prevention on iOS */
+@media (hover: none){
+  .card, .post-card, .bubble-wrap{
+    -webkit-touch-callout: none;
+  }
+}

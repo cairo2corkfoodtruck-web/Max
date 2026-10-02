@@ -1,0 +1,314 @@
+/* ============================================================
+   performance.css — تسريع شامل
+   يستبدل backdrop-filter الثقيل + يمنع الحركات غير الضرورية
+   ============================================================ */
+
+/* ============================================================
+   1. قتل backdrop-filter الثقيل
+   ============================================================ */
+.search-bar,
+.settings-group,
+.post-box,
+.post-card,
+.bio-card,
+.info-bar,
+.profile-stats,
+.stats-card,
+.archive-section,
+.archive-opened,
+.act-group,
+.sheet,
+.dialog,
+.reactions-picker,
+.comment-input-bar,
+.chat-input,
+.chat-search-bar,
+.msg-quick-actions,
+.recording-indicator,
+.pinned-banner,
+.blocked-banner,
+.scroll-bottom-btn,
+.user-hero,
+.bubble-wrap.other .bubble,
+.msg-quick-actions,
+.hero-id,
+.hero-edit{
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* استبدل بخلفيات صلبة */
+.search-bar{ background: #FFFFFF !important; }
+.app.dark .search-bar{ background: #161B2A !important; }
+
+.settings-group{ background: #FFFFFF !important; }
+.app.dark .settings-group{ background: #161B2A !important; }
+
+.post-box{ background: #FFFFFF !important; }
+.app.dark .post-box{ background: #161B2A !important; }
+
+.post-card{ background: #FFFFFF !important; }
+.app.dark .post-card{ background: #161B2A !important; }
+
+.bio-card{ background: #FFFFFF !important; }
+.app.dark .bio-card{ background: #161B2A !important; }
+
+.info-bar{ background: #FFFFFF !important; }
+.app.dark .info-bar{ background: #161B2A !important; }
+
+.profile-stats{ background: #FFFFFF !important; }
+.app.dark .profile-stats{ background: #161B2A !important; }
+
+.act-group{ background: #FFFFFF !important; }
+.app.dark .act-group{ background: #1A2132 !important; }
+
+.sheet{
+  background: #F5F6FA !important;
+  box-shadow: 0 -8px 30px rgba(0,0,0,.15) !important;
+}
+.app.dark .sheet{ background: #131A28 !important; }
+
+.dialog{ background: #FFFFFF !important; }
+.app.dark .dialog{ background: #1A2132 !important; }
+
+.reactions-picker{ background: #FFFFFF !important; }
+.app.dark .reactions-picker{ background: #1A2132 !important; }
+
+.comment-input-bar{ background: #FFFFFF !important; }
+.app.dark .comment-input-bar{ background: #0F1420 !important; }
+
+.chat-input{
+  background: #FAFAFD !important;
+  box-shadow: 0 -2px 10px rgba(0,0,0,.05) !important;
+}
+.app.dark .chat-input{ background: #0F1420 !important; }
+
+.chat-search-bar{ background: #FAFAFD !important; }
+.app.dark .chat-search-bar{ background: #0B0F1F !important; }
+
+.pinned-banner{ background: linear-gradient(180deg, rgba(79,115,255,.15), rgba(79,115,255,.08)) !important; }
+
+.blocked-banner{ background: rgba(240,66,77,.1) !important; }
+
+.scroll-bottom-btn{
+  background: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,.12) !important;
+}
+.app.dark .scroll-bottom-btn{ background: #1A2132 !important; }
+
+/* فقاعات الطرف الآخر — خلفية صلبة */
+.bubble-wrap.other .bubble{
+  background: #FFFFFF !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06) !important;
+}
+.app.dark .bubble-wrap.other .bubble{
+  background: #222A3E !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25) !important;
+}
+
+/* ============================================================
+   2. تسريع الحركات — استبدال الحركات المعقدة بـ opacity فقط
+   ============================================================ */
+.bubble-wrap,
+.bubble,
+.card,
+.post-box,
+.post-card,
+.settings-item,
+.act,
+.btn,
+.btn-sm,
+.tab,
+.hero-theme,
+.avatar,
+.post-action{
+  transition: opacity .15s ease, background-color .15s ease !important;
+}
+
+/* إلغاء transform transitions على العناصر الثقيلة */
+.card,
+.post-card,
+.post-box,
+.act,
+.settings-item{
+  transition: background-color .15s ease !important;
+}
+.card:active,
+.post-card:active,
+.post-box:active,
+.act:active,
+.settings-item:active{
+  transform: none !important;
+  opacity: .85 !important;
+}
+
+/* إلغاء animations غير ضرورية */
+@keyframes bubbleIn{
+  from{ opacity: 0; }
+  to{ opacity: 1; }
+}
+.bubble-wrap.fresh{ animation: bubbleIn .2s ease-out !important; }
+
+.heart-overlay.show{ animation-duration: .5s !important; }
+
+/* إلغاء pulse animations */
+.pulse-glow,
+.pulseRec{
+  animation: none !important;
+}
+
+/* إلغاء splash pulse */
+.splash .logo{
+  animation: none !important;
+}
+
+/* إلغاء wave pulse على الصوت */
+.audio-msg.playing .audio-visual .bar{
+  animation: none !important;
+  opacity: .9 !important;
+}
+
+/* ============================================================
+   3. تقليل الظلال الثقيلة
+   ============================================================ */
+.post-card,
+.post-box,
+.bio-card,
+.info-bar,
+.profile-stats,
+.settings-group,
+.stats-card,
+.user-hero{
+  box-shadow: 0 1px 4px rgba(0,0,0,.05) !important;
+}
+.app.dark .post-card,
+.app.dark .post-box,
+.app.dark .bio-card,
+.app.dark .info-bar,
+.app.dark .profile-stats,
+.app.dark .settings-group,
+.app.dark .stats-card{
+  box-shadow: 0 1px 4px rgba(0,0,0,.3) !important;
+}
+
+.user-hero{
+  box-shadow: 0 8px 20px -8px var(--theme-shadow, rgba(0,0,0,.2)) !important;
+}
+
+/* ============================================================
+   4. تسريع القوائم الطويلة
+   ============================================================ */
+#chat-list,
+#msgs.chat-box,
+#my-posts-feed,
+#user-posts-feed,
+#friends-list,
+#req-list,
+.comments-list{
+  contain: layout style paint;
+}
+
+#chat-list .card,
+#chat-list .archive-section,
+.post-card,
+#msgs .bubble-wrap{
+  contain: layout style paint;
+}
+
+/* ============================================================
+   5. تسريع scroll — سموث سريع
+   ============================================================ */
+#chat-content,
+.content,
+.comments-list,
+.sheet{
+  scroll-behavior: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================================
+   6. تبسيط الـ SVG icons
+   ============================================================ */
+.svg-ic,
+.nav-btn svg,
+.icon-btn svg,
+.act svg,
+.post-action svg{
+  shape-rendering: optimizeSpeed;
+  text-rendering: optimizeSpeed;
+}
+
+/* ============================================================
+   7. تقليل جودة الحركات المُفرطة
+   ============================================================ */
+.tab svg{
+  transition: transform .15s ease !important;
+}
+.tab.active svg{
+  transform: none !important;
+}
+
+/* إزالة tween على الألوان */
+.tab.active,
+.tab{
+  transition: color .15s ease !important;
+}
+
+/* ============================================================
+   8. منع select highlight
+   ============================================================ */
+*{
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================================================
+   9. منع reflow غير ضروري — للصور
+   ============================================================ */
+img{
+  content-visibility: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+#chat-list img,
+.post-card img{
+  content-visibility: auto;
+}
+
+/* ============================================================
+   10. قطع الحركات إذا الجهاز ضعيف
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   11. تحسين الأشرطة
+   ============================================================ */
+.nav{
+  background: #FAFAFD !important;
+  backdrop-filter: none !important;
+}
+.app.dark .nav{ background: #0F1420 !important; }
+
+.tab-bar{
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 -1px 4px rgba(0,0,0,.05) !important;
+}
+.app.dark .tab-bar{ background: #131A28 !important; }
+
+/* ============================================================
+   12. منع backface artifacts
+   ============================================================ */
+.card,
+.post-card,
+.bubble,
+.sheet,
+.dialog{
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
